@@ -4,7 +4,7 @@ description: |
   Welcome to our new blog, Grab and Code. We hope you enjoy 
   reading what we have to say!
 author:
-  - name: Nora Jones 
+  - name: MaoMont
     url: https://example.com/norajones
     affiliation: Spacely Sprockets
     affiliation_url: https://example.com/spacelysprokets
