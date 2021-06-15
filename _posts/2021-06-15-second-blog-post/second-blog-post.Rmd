@@ -1,10 +1,10 @@
 ---
 title: "second blog post"
 description: |
-  A short description of the post.
+  A short description of the second post.
 author:
-  - name: Nora Jones
-    url: https://example.com/norajones
+  - name: Mao Mont
+    url: https://grabandcode.netlify.app/
 date: 06-15-2021
 output:
   distill::distill_article:
