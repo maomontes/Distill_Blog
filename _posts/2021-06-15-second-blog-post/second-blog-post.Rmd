@@ -1,6 +1,6 @@
 ---
 title: "second blog post"
-description: |
+description: 
   A short description of the second post.
 author:
   - name: Mao Mont
