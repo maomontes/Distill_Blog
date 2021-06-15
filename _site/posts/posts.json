@@ -5,32 +5,32 @@
     "description": "Welcome to our new blog, Grab and Code. We hope you enjoy \nreading what we have to say!",
     "author": [
       {
-        "name": "Nora Jones",
+        "name": "MaoMont",
         "url": "https://example.com/norajones"
       }
     ],
     "date": "2021-06-15",
     "categories": [],
-    "contents": "\r\n\r\n\r\n\r\n",
-    "preview": {},
-    "last_modified": "2021-06-15T12:48:35-05:00",
-    "input_file": {}
+    "contents": "\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+    "preview": "posts/welcome/welcome_files/figure-html5/unnamed-chunk-1-1.png",
+    "last_modified": "2021-06-15T13:59:31-05:00",
+    "input_file": "welcome.knit.md"
   },
   {
     "path": "posts/2021-06-15-second-blog-post/",
     "title": "second blog post",
-    "description": "A short description of the post.",
+    "description": "A short description of the second post.",
     "author": [
       {
-        "name": "Nora Jones",
-        "url": "https://example.com/norajones"
+        "name": "Mao Mont",
+        "url": "https://grabandcode.netlify.app/"
       }
     ],
     "date": "2021-06-15",
     "categories": [],
     "contents": "\r\nDistill is a publication format for scientific and technical writing, native to the web.\r\nLearn more about using Distill at https://rstudio.github.io/distill.\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
     "preview": "posts/2021-06-15-second-blog-post/second-blog-post_files/figure-html5/unnamed-chunk-1-1.png",
-    "last_modified": "2021-06-15T13:34:58-05:00",
+    "last_modified": "2021-06-15T13:58:54-05:00",
     "input_file": "second-blog-post.knit.md"
   }
 ]
