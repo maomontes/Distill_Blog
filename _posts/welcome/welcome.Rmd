@@ -24,3 +24,9 @@ knitr::opts_chunk$set(echo = FALSE)
 
 
 
+```{r}
+ggplot(data = starwars, aes(height, mass)) +
+  geom_point() +
+  scale_y_log10()
+```
+
