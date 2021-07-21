@@ -293,4 +293,4 @@ saka2 <- saka1 + draw_grob(saka_png, 0, 0, scale = 0.11, vjust = -0.44, hjust = 
 emile2 + saka2
 ```
 
-Todos los datos recopilados (@FBRef) y compilados en el lenguaje R usando Rstudio. Los (@Graficos) fueron tomando como ejemplo de sitio (@serrano2021liverpool).
+Todos los datos recopilados (@FBRef) y compilados en el lenguaje R usando Rstudio. Los graficos(@Graficos) fueron tomando como ejemplo de sitio (@serrano2021liverpool).
