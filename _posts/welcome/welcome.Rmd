@@ -1,13 +1,13 @@
 ---
 title: "Arsenal Temporada 2020/21"
 description: |
-  Blog de analisis de futbol y otros temas
+  Analisis del Ataque de Arsenal
 author:
-  - name: 
+  - name: Mao Montes
     url: 
     affiliation: 
     affiliation_url: 
-date: 07-20-2021
+date: 2021-07-20
 bibliography: lib.bib
 preview: Emirates_Stadium_Logo_Arsenal.jpg
 output:
