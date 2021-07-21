@@ -1,36 +1,19 @@
 [
   {
     "path": "posts/welcome/",
-    "title": "Welcome to Grab and Code",
-    "description": "Welcome to our new blog, Grab and Code. We hope you enjoy \nreading what we have to say!",
+    "title": "Arsenal Temporada 2020/21",
+    "description": "Blog de analisis de futbol y otros temas",
     "author": [
       {
-        "name": "MaoMont",
-        "url": "https://example.com/norajones"
+        "name": "",
+        "url": {}
       }
     ],
-    "date": "2021-06-15",
+    "date": "2021-07-20",
     "categories": [],
-    "contents": "\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
-    "preview": "posts/welcome/welcome_files/figure-html5/unnamed-chunk-1-1.png",
-    "last_modified": "2021-06-15T13:59:31-05:00",
+    "contents": "\r\n\r\nContents\r\nGoles Esperados “xG”\r\nAnalisis Individual\r\nEl Futuro Ofensivo de Arsenal\r\n\r\n\r\nLa Liga Premier de Inglaterra es la mas competitiva en Europa por su estilo de juego que siempre se ha caracterizado por ser un futbol dinámico, físico y arraigado a sus comunidades, es una liga donde hasta el equipo mas pequeño te puede dar la sorpresa.\r\nComo hincha del futbol no se me ha escapado la oportunidad de analizar a unos de mis equipos favoritos en la Liga Premier, Arsenal de la ciudad de Londres. Aunque en estas ultimas temporadas los “Gunners” no han tenido regularidad y la rotación de directores técnicos ha complicado mas su situación en la tabla de posiciones, no deja de ser un club del prestigioso “Big Six,” los 6 clubes grandes de Inglaterra (Arsenal, Chelsea, Liverpool, Manchester United, Manchester City y Tottenham).\r\n\r\n\r\n\r\nGoles Esperados “xG”\r\nEl modelo xG Goles Esperados\" sirve para medir la eficiencia de los atacantes para aprovechar las opciones de gol. El modelo es explicado mas ha fondo aca.\r\n\r\n\r\n\r\nA pesar de que los dirigidos por Mikel Arteta estuvieron por encima del promedio aun así no fue suficiente para alcanzar puestos de Europa League o Champions League, la principal razón es la falta de contundencia de sus delanteros. El siguiente gráfico muestra la poca efectividad a la hora de crear y/o finalizar las oportunidades de gol.\r\nLa escala de color es la resta entre Goles y Asistencia menos Goles y Asistencia Esperados cada 90 minutos. Esta escala determina si los equipos los equipos aprovecharon las oportunidades en frente del arco rival.\r\n\r\n\r\n\r\nAl evaluar el anterior gráfico se puede observar que a pesar de tener atacantes de gran calidad individual y colectiva no fue suficiente para mantener una ofensiva eficaz, ademas cabe mencionar que equipos como Leeds United, West Ham y Leicester City tuvieron juego colectivo muy superior a un equipo de la talla de Arsenal.\r\nAnalisis Individual\r\nLlegando a un plano mas individual la siguiente tabla evidencia que sus principales atacantes tuvieron una temporada para el olvido. Pierre-Emerick Aubameyang y Alexandre Lacazette han tenido un rendimiento muy debajo de sus estándares. Pero no todas son malas noticias ya que jóvenes como Bukayo Saka(20 años) y Nicolas Pépé(25 años) vienen sumando experiencia jugando mas de 50% de los minutos disputados esta temporada.\r\n\r\n\r\n\r\nGoles Esperados xG exceptuando penales\r\n\r\n\r\n\r\nTemporada\r\n\r\n\r\nPierre-Emerick Aubameyang\r\n\r\n\r\nAlexandre Lacazette\r\n\r\n\r\nWillian\r\n\r\n\r\nBukayo Saka\r\n\r\n\r\nNicolas Pépé\r\n\r\n\r\n2018-2019\r\n\r\n\r\n0.53\r\n\r\n\r\n0.44\r\n\r\n\r\n0.21\r\n\r\n\r\n0\r\n\r\n\r\n0\r\n\r\n\r\n2019-2020\r\n\r\n\r\n0.41\r\n\r\n\r\n0.41\r\n\r\n\r\n0.14\r\n\r\n\r\n0.07\r\n\r\n\r\n0.17\r\n\r\n\r\n2020-2021\r\n\r\n\r\n0.35\r\n\r\n\r\n0.35\r\n\r\n\r\n0.13\r\n\r\n\r\n0.24\r\n\r\n\r\n0.34\r\n\r\n\r\nEl Futuro Ofensivo de Arsenal\r\nMirando hacia los juveniles se destacan varios jugadores menores de 23, pero los que mas resaltan son Emile Smith-Rowe en su primera temporada y Bukayo Saka en su segunda temporada con el equipo principal.\r\n\r\n\r\n\r\nLas gráficas de radar se evidencia lo determinantes que pueden ser estos jugadores en un corto plazo.\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+    "preview": "posts/welcome/Emirates_Stadium_Logo_Arsenal.jpg",
+    "last_modified": "2021-07-20T20:13:30-05:00",
     "input_file": "welcome.knit.md"
-  },
-  {
-    "path": "posts/2021-06-15-second-blog-post/",
-    "title": "second blog post",
-    "description": "A short description of the second post.",
-    "author": [
-      {
-        "name": "Mao Mont",
-        "url": "https://grabandcode.netlify.app/"
-      }
-    ],
-    "date": "2021-06-15",
-    "categories": [],
-    "contents": "\r\nDistill is a publication format for scientific and technical writing, native to the web.\r\nLearn more about using Distill at https://rstudio.github.io/distill.\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
-    "preview": "posts/2021-06-15-second-blog-post/second-blog-post_files/figure-html5/unnamed-chunk-1-1.png",
-    "last_modified": "2021-06-15T13:58:54-05:00",
-    "input_file": "second-blog-post.knit.md"
   }
 ]

@@ -1,34 +1,295 @@
 ---
-title: "Welcome to Grab and Code"
+title: "Arsenal Temporada 2020/21"
 description: |
-  Welcome to our new blog, Grab and Code. We hope you enjoy 
-  reading what we have to say!
+  Blog de analisis de futbol y otros temas
 author:
-  - name: MaoMont
-    url: https://example.com/norajones
-    affiliation: Spacely Sprockets
-    affiliation_url: https://example.com/spacelysprokets
-date: 06-15-2021
+  - name: 
+    url: 
+    affiliation: 
+    affiliation_url: 
+date: 07-20-2021
+bibliography: lib.bib
+preview: Emirates_Stadium_Logo_Arsenal.jpg
 output:
   distill::distill_article:
     self_contained: false
+    toc: true
+    toc_float: true
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align = "center", fig.height = 5, fig.width = 9,
+                      layout = "l-body-outset", dpi = 180)
 
-# Learn more about creating blogs with Distill at:
-# https://rstudio.github.io/distill/blog.html
+ggplot2::theme_set(ggplot2::theme_minimal())
+thematic::thematic_on(font = thematic::font_spec('Lato'),
+                      bg = 'white', fg = 'black', accent = "#0ea89f")
+```
+![](https://c4.wallpaperflare.com/wallpaper/589/958/368/arsenal-london-arsenal-fc-wallpaper-preview.jpg)
 
+La Liga Premier de Inglaterra es la mas competitiva en Europa por su estilo de juego que siempre se ha caracterizado por ser un futbol dinámico, físico y arraigado a sus comunidades, es una liga donde hasta el equipo mas pequeño te puede dar la sorpresa.
+
+Como hincha del futbol no se me ha escapado la oportunidad de analizar a unos de mis equipos favoritos en la Liga Premier, Arsenal de la ciudad de Londres.  Aunque en estas ultimas temporadas los <b>“Gunners”</b> no han tenido regularidad y la rotación de directores técnicos ha complicado mas su situación en la tabla de posiciones, no deja de ser un club del prestigioso “Big Six”, los 6 clubes grandes de Inglaterra (Arsenal, Chelsea,  Liverpool, Manchester United, Manchester City  y Tottenham).
+
+```{r librerias}
+extrafont::loadfonts(device = "win")
+
+library(tidyverse)
+library(scales)
+library(worldfootballR)
+library(understatr)
+library(ggrepel)
+library(kableExtra)
+library(formattable)
+library(patchwork)
+library(ggtext)
+library(ggforce)
+library(magick)
+library(glue)
+library(cowplot)
+library(png)
+library(concaveman)
 ```
 
 
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+
+prem_teams <- read_rds("C:/Users/maoma/Documents/RProjects/Distill_Blog/_posts/welcome/data/prem_teams.RDS")
+
+prem_players <- read_rds("C:/Users/maoma/Documents/RProjects/Distill_Blog/_posts/welcome/data/prem_players.RDS")
+```
+
+
+
+## Goles Esperados "xG"
+
+El modelo xG Goles Esperados" sirve para medir la eficiencia de los atacantes para aprovechar las opciones de gol. El modelo es explicado mas ha fondo [aca](https://www.bundesliga.com/es/bundesliga/noticias/goles-esperados-xg-sistema-que-es-como-funciona-sportec-solutions-liga-alemana-5580).
+
+```{r xG}
+#xG 2021
+prem_teams %>% 
+  filter(team_or_opponent == "team") %>% 
+  ggplot(aes(npx_g_expected, reorder(squad, npx_g_expected))) +
+  geom_col(fill = "dodgerblue4", alpha = 0.6) +
+  geom_col(data = prem_teams %>% 
+             filter(squad == "Arsenal", season_end_year == "2021",
+                    team_or_opponent == "team"), 
+           fill = "firebrick") +
+  geom_text(aes(y = fct_reorder(squad, npx_g_expected), 
+                x = npx_g_expected, label = npx_g_expected),
+            color = "white", hjust = 1.5, fontface = "bold") +
+  geom_vline(xintercept = 43.1, lty = 5, alpha = 0.3) +
+  annotate("text", x = 44, y = 1, hjust = 0, fontface = "bold", 
+           label = "Promedio: 43.1") +
+  coord_cartesian(expand = FALSE) +
+  labs(caption = "Datos: Fbref | Statsbomb",
+       x = "Goles Esperados xG",
+       y = "") +
+  theme(axis.text.y = element_text(face = "bold"),
+        axis.text.x = element_text(face = "bold"),
+        axis.title.x = element_text(face = "bold"),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        plot.caption = element_text(face = "italic", hjust = 0))
+```
+
+A pesar de que los dirigidos por <b>Mikel Arteta</b> estuvieron por encima del promedio aun así no fue suficiente para alcanzar puestos de Europa League o Champions League, la principal razón es la falta de contundencia de sus delanteros. El siguiente gráfico muestra la poca efectividad a la hora de crear y/o finalizar las oportunidades de gol.
+
+La escala de color es la resta entre <b>Goles y Asistencia menos Goles y Asistencia Esperados cada 90 minutos.</b> Esta escala determina si los equipos los equipos aprovecharon las oportunidades en frente del arco rival.
+
+```{r xG-GA}
+prem_teams %>% 
+  filter(team_or_opponent == "team") %>% 
+  ggplot(aes(x_g_x_a_per, g_a_per)) +
+  
+  geom_abline(slope = 1, intercept = 0, alpha = 0.3, size = 0.2) +
+  
+  geom_point(aes(fill = g_a_per - x_g_x_a_per), 
+             stroke = 0.7, shape = 21, size = 3, 
+             color = "gray20", alpha = 0.8) +
+  
+  geom_text_repel(aes(label = squad), force = 10) +
+  
+  scale_fill_distiller(type = "div", palette = 5, limits = c(-0.7, 0.7), breaks = seq(-0.7, 0.7, 0.2),
+                    guide = guide_colorsteps(show.limits = TRUE,
+                                                direction = "horizontal",
+                                                barwidth = unit(15, 'lines'))) +
+  
+  coord_cartesian(xlim = c(0, 4), ylim = c(0, 4), clip = "on", expand = FALSE) +
+  
+  labs(x = "Goles Esperados + Asistencias Esperadas",
+       y = "Goles + Asistencias",
+       fill = "",
+       caption = "Datos: Fbref | Statsbomb") +
+  
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.text = element_text(face = "bold"),
+        axis.title = element_text(face = "bold"),
+        plot.subtitle = element_text(face = "bold", hjust = 0.5),
+        plot.caption = element_text(face = "italic", hjust = 0),
+        panel.border = element_blank(),
+        legend.position = c(0.79, 0.08))
+```
+
+Al evaluar el anterior gráfico se puede observar que a pesar de tener atacantes de gran calidad individual y colectiva no fue suficiente para mantener una ofensiva eficaz, ademas cabe mencionar que equipos como Leeds United, West Ham y Leicester City tuvieron juego colectivo muy superior a un equipo de la talla de Arsenal.
+
+## Analisis Individual
+
+Llegando a un plano mas individual la siguiente tabla evidencia que sus principales atacantes tuvieron una 
+temporada para el olvido. Pierre-Emerick Aubameyang y Alexandre Lacazette han tenido un rendimiento muy
+debajo de sus estándares. Pero no todas son malas noticias ya que jóvenes como <b>Bukayo Saka(20 años) y Nicolas Pépé(25 años)</b>
+vienen sumando experiencia jugando mas de 50% de los minutos disputados esta temporada.
 
 ```{r}
-library(tidyverse)
+ars_att <- read_rds("C:/Users/maoma/Documents/RProjects/Distill_Blog/_posts/welcome/data/arsenal_attack.RDS")
 
-ggplot(data = starwars, aes(height, mass)) +
-  geom_point() +
-  scale_y_log10()
+ars_att %>%
+  mutate(across(2:6, ~ cell_spec(.x, "html", color = ifelse(.x < .x[1], "firebrick", "blue")))) %>% 
+  kable("html", escape = F, align = "c") %>% 
+  kable_styling(full_width = F, "striped") %>% 
+  add_header_above(c("Goles Esperados xG exceptuando penales" = 6))
 ```
 
+
+## El Futuro Ofensivo de Arsenal
+Mirando hacia los juveniles se destacan varios jugadores menores de 23, pero los que mas resaltan son Emile Smith-Rowe en su primera temporada y Bukayo Saka en su segunda temporada con el equipo principal.
+
+```{r}
+desc <- c("Emile Smith-Rowe y Bukayo Saka han sido de los jovenes menores de 23 años mas destacados en la Liga Premier. Son jugadores netamente ofensivos aportando un 20% de las Opciones de Gol creadas en toda la temporada")
+
+prem_players %>% 
+  filter(age <= 23, mins_per_90 >= median(mins_per_90)) %>% 
+  ggplot(aes(y = (kp/mins_per_90), x = gca90_gca)) +
+  geom_point(aes(alpha = (kp/mins_per_90) + gca90_gca), size = 3) +
+  geom_point(data = prem_players %>% 
+               filter(str_detect(squad, "Arsenal"), 
+                      gca90_gca >= 0.3, 
+                      age <= 23, 
+                      mins_per_90 >= median(mins_per_90)),
+             fill = "firebrick1", size = 4, shape = 21, color = "gray20", alpha = 0.8) +
+  # geom_text_repel(data = prem_players %>% 
+  #             filter(gca90_gca >= 0.3, age <= 23, mins_per_90 >= median(mins_per_90),
+  #                    str_detect(squad, "Arsenal")),
+  #           aes(label = player), min.segment.length = .3, max.overlaps = 5) +
+  
+  geom_mark_hull(aes(label = "Jugadores U23",
+                     filter = player %in% c("Emile Smith-Rowe", "Bukayo Saka"),
+                     description = desc),
+                 con.type = "elbow", con.border = "none", concavity = 1, 
+                 label.width = unit(20, 'lines'), con.cap = 0, 
+                 label.minwidth = unit(15, 'lines')) +
+  
+  coord_cartesian(ylim = c(0, 3), xlim = c(0, 1), clip = "off") +
+  theme(legend.position = "none",
+        plot.caption = element_markdown(hjust = 0, face = "bold")) +
+  labs(x = "Jugadas de Gol",
+       y = "Pases Clave",
+       caption = "*Datos: Fbref | Statsbomb*")
+```
+
+Las gráficas de radar se evidencia lo determinantes que pueden ser estos jugadores en un corto plazo. 
+
+```{r}
+prem_players_radar <- prem_players %>% 
+  select(player, mins_per_90, so_t_per_90_standard, npx_g_expected, kp, final_third, gca90_gca, x_a) %>% 
+  mutate(across(so_t_per_90_standard:x_a, ~ round(.x / mins_per_90, digits = 2))) %>% 
+  filter(mins_per_90 >= median(mins_per_90)) %>% 
+  rename("xG" = "npx_g_expected",
+         "Jugadas\nde Gol" = "gca90_gca",
+         "Pases\nClave" = "kp",
+         "Pases\nUltimo\nTercio" = "final_third",
+         "Disparos al\nArco" = "so_t_per_90_standard",
+         "xA" = "x_a")
+
+
+
+z_score <- function(x) {
+  z = (x - mean(x, na.rm = TRUE)) / sd(x, na.rm = TRUE)
+  return(z)
+}
+
+
+prem_players_radar <- prem_players_radar %>% 
+  mutate(across("Disparos al\nArco":"xA", ~ z_score(.x)))
+
+
+t_score <- function(x) {
+  t = (x * 10) + 50
+  t = ifelse(t > 100, 100,
+             ifelse(t < 0, 0, t))
+  return(t)
+}
+
+prem_players_radar <- prem_players_radar %>% 
+  mutate(across("Disparos al\nArco":"xA", ~ t_score(.x)))
+
+
+prem_players_radar <- prem_players_radar %>% 
+  pivot_longer(cols = 3:8, names_to = "variable", values_to = "value")
+
+
+#Radar Emile
+png_emile <- readPNG("data/p240273.png")
+emile_png <- grid::rasterGrob(png_emile, interpolate = TRUE)
+
+emile <- prem_players_radar %>% 
+  filter(str_detect(player, "Emile")) %>% 
+  ggplot(aes(variable, value, fill = variable)) +
+  geom_col(color = "white", width = 0.8) +
+  coord_polar(theta = "x") +
+  geom_hline(yintercept = seq(50, 50, by = 1), size = 0.2, alpha = 0.2) +
+  geom_hline(yintercept = seq(75, 75, by = 1), size = 0.4, alpha = 0.3) +
+  geom_hline(yintercept = seq(100, 100, by = 1), size = 0.5, alpha = 0.5) +
+  #geom_label_repel(aes(label = round(value, digits = 1))) +
+  scale_fill_brewer(type = "qual", palette = 6) +
+  theme(axis.text.x = element_text(face = "bold", size = 8),
+        legend.title = element_blank(),
+        legend.position = "none",
+        axis.text.y = element_blank(),
+        panel.grid = element_blank(),
+        plot.caption = element_markdown(hjust = 0),
+        plot.title = element_markdown(hjust = 0.5),
+        plot.subtitle = element_markdown(hjust = 0.5, size = 7.5)) +
+  labs(x = "", y = "", caption = "*Datos: Fbref | Statsbomb*",
+       title = "<b>Emile Smith-Rowe</b>",
+       subtitle = "*1440 Minutos Disputados*")
+
+emile1 <- ggdraw(emile)
+
+emile2 <- emile1 + draw_grob(emile_png, 0, 0, scale = 0.11, vjust = -0.44, hjust = 0.25)
+
+#Radar Saka
+png_saka <- readPNG("data/p246669.png")
+saka_png <- grid::rasterGrob(png_saka, interpolate = TRUE)
+
+saka <- prem_players_radar %>% 
+  filter(str_detect(player, "Bukayo")) %>% 
+  ggplot(aes(variable, value, fill = variable)) +
+  geom_col(color = "white", width = 0.8) +
+  coord_polar(theta = "x") +
+  geom_hline(yintercept = seq(50, 50, by = 1), size = 0.2, alpha = 0.2) +
+  geom_hline(yintercept = seq(75, 75, by = 1), size = 0.4, alpha = 0.3) +
+  geom_hline(yintercept = seq(100, 100, by = 1), size = 0.5, alpha = 0.5) +
+  #geom_label_repel(aes(label = round(value, digits = 1))) +
+  scale_fill_brewer(type = "qual", palette = 6) +
+  theme(axis.text.x = element_text(face = "bold", size = 8),
+        legend.title = element_blank(),
+        legend.position = "none",
+        axis.text.y = element_blank(),
+        panel.grid = element_blank(),
+        plot.title = element_markdown(hjust = 0.5),
+        plot.subtitle = element_markdown(hjust = 0.5, size = 7.5),
+        plot.caption = element_markdown(hjust = 0.5)) +
+  labs(x = "", y = "", caption = "*Estadistica cada 90 minutos*",
+       subtitle = "*2553 Minutos Disputados*",
+       title = "<b>Bukayo Saka</b>")
+
+saka1 <- ggdraw(saka)
+
+saka2 <- saka1 + draw_grob(saka_png, 0, 0, scale = 0.11, vjust = -0.44, hjust = 0.25)
+
+emile2 + saka2
+```

@@ -1,0 +1,24 @@
+% Encoding: UTF-8
+
+@Misc{serrano2021liverpool,
+  author = {Serrano, Rodrigo},
+  title  = {rodserr Logbook: Liverpool 20-21 EPL Performance},
+  year   = {2021},
+  url    = {https://rodserr.github.io/logbook/posts/2021-05-31-liverpool-20-21-epl-performance/},
+}
+
+@Online{soccerPlots,
+  author = {Ryo Nakagawara},
+  title  = {My R Table Competition 2020 Submission: xG Timeline Table for Soccer/Football with {gt}!},
+  url    = {https://ryo-n7.github.io/2020-11-02-xG-timeline-table-competition-tutorial/},
+  year   = {2020},
+}
+
+@Online{Datos,
+  author = {Sports Reference LLC / Statsbomb},
+  title  = {FBRef},
+  url    = {https://fbref.com/en/squads/18bb7c10/Arsenal-Stats},
+  year   = {2021},
+}
+
+@Comment{jabref-meta: databaseType:bibtex;}
