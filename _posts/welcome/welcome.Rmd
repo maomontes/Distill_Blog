@@ -190,7 +190,7 @@ prem_players %>%
        caption = "*Datos: Fbref | Statsbomb*")
 ```
 
-Las gráficas de radar se evidencia lo determinantes que pueden ser estos jugadores en un corto plazo. 
+Las gráficas de radar se evidencia lo determinantes que pueden ser estos jugadores en un corto plazo. Estas estadísticas son basada en cada <b>90 minutos de juego disputado</b>.
 
 ```{r}
 prem_players_radar <- prem_players %>% 
@@ -281,9 +281,8 @@ saka <- prem_players_radar %>%
         axis.text.y = element_blank(),
         panel.grid = element_blank(),
         plot.title = element_markdown(hjust = 0.5),
-        plot.subtitle = element_markdown(hjust = 0.5, size = 7.5),
-        plot.caption = element_markdown(hjust = 0.5)) +
-  labs(x = "", y = "", caption = "*Estadistica cada 90 minutos*",
+        plot.subtitle = element_markdown(hjust = 0.5, size = 7.5)) +
+  labs(x = "", y = "",
        subtitle = "*2553 Minutos Disputados*",
        title = "<b>Bukayo Saka</b>")
 
@@ -293,3 +292,5 @@ saka2 <- saka1 + draw_grob(saka_png, 0, 0, scale = 0.11, vjust = -0.44, hjust = 
 
 emile2 + saka2
 ```
+
+Todos los datos recopilados (@FBRef) y compilados en el lenguaje R usando Rstudio. Los (@Graficos) fueron tomando como ejemplo de sitio (@serrano2021liverpool).
